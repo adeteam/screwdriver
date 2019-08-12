@@ -12,6 +12,7 @@ spec:
   restartPolicy: Never
   {{#startsWith "adeteam/ubuntu-virt" container}}
   hostNetwork: true
+  dnsPolicy: ClusterFirstWithHostNet
   privileged: true
   {{/startsWith}}
   containers:
