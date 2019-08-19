@@ -23,7 +23,7 @@ spec:
         cpu: {{cpu}}m
         memory: {{memory}}Gi
         {{#startsWith "adeteam/ubuntu-virt" container}}
-        ephemeral-storage: "20Gi"
+        ephemeral-storage: 40Gi
         {{/startsWith}}
     {{#if docker.enabled}}
     env:
