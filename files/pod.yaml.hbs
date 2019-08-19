@@ -22,6 +22,9 @@ spec:
       limits:
         cpu: {{cpu}}m
         memory: {{memory}}Gi
+        {{#startsWith "adeteam/ubuntu-virt" container}}
+        ephemeral-storage: "8Gi"
+        {{/startsWith}}
     {{#if docker.enabled}}
     env:
       - name: DOCKER_HOST
