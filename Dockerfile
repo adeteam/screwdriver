@@ -1,9 +1,9 @@
-FROM screwdrivercd/screwdriver:v0.5.722
+FROM screwdrivercd/screwdriver:v0.5.754
 
 RUN mkdir -p /opt/files
 COPY files/* /opt/files/
 
-RUN cd /usr/src/app && npm install screwdriver-scm-bitbucket@3.4.8
+RUN cd /usr/src/app && npm install screwdriver-scm-bitbucket@3.4.9
 
 # NOTE: in order to support custom hostNetwork and privilege mode for specific containers
 #       will will add the handlebar helps and inject some code into the k8s executor

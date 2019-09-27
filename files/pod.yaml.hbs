@@ -47,6 +47,9 @@ spec:
   {{#if docker.enabled}}
   - name: dind
     image: docker:18.05-dind
+    args:
+      - "--mtu"
+      - "1450"
     resources:
       limits:
         cpu: {{docker.cpu }}m
