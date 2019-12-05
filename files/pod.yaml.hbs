@@ -60,7 +60,6 @@ spec:
       - name: dind-storage
         mountPath: /var/lib/docker
   {{/if}}
-
   initContainers:
   - name: launcher
     image: {{launcher_image}}
@@ -81,3 +80,9 @@ spec:
     - name: dind-storage
       emptyDir: {}
     {{/if}}
+  tolerations:
+    - key: node-role.kubernetes.io/master
+      operator: Exists
+      effect: NoSchedule
+    - operator: Exists
+      effect: NoSchedule
