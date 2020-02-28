@@ -1,4 +1,4 @@
-FROM screwdrivercd/screwdriver:v0.5.800
+FROM screwdrivercd/screwdriver:v0.5.861
 
 RUN mkdir -p /opt/files
 COPY files/* /opt/files/
