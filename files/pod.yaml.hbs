@@ -6,6 +6,9 @@ metadata:
     sdbuild: "{{build_id_with_prefix}}"
     app: screwdriver
     tier: builds
+    {{#startsWith "adeteam/ubuntu-virt" container}}
+    type: virt
+    {{/startsWith}}
 spec:
   serviceAccount: {{service_account}}
   automountServiceAccountToken: false
@@ -13,6 +16,16 @@ spec:
   {{#startsWith "adeteam/ubuntu-virt" container}}
   hostNetwork: true
   dnsPolicy: ClusterFirstWithHostNet
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: "type"
+                operator: In
+                values:
+                  - virt
+          topologyKey: "kubernetes.io/hostname"
   {{/startsWith}}
   containers:
   - name: build
