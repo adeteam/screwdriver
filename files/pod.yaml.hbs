@@ -38,8 +38,13 @@ spec:
   - name: "{{build_id_with_prefix}}"
     image: {{container}}
     imagePullPolicy: {{image_pull_policy}}
+    {{#startsWith "adeteam/ubuntu-virt" container}}
+    securityContext:
+      privileged: true
+    {{else}}
     securityContext:
       privileged: {{privileged}}
+    {{/startsWith}}
     resources:
       limits:
         cpu: {{cpu}}m
@@ -102,13 +107,12 @@ spec:
       name: {{this.name}}
       readOnly: {{this.readOnly}}
     {{/each}}
-    {{#startsWith "adeteam/ubuntu-virt" container}}
-    securityContext:
-      privileged: true
-    {{/startsWith}}
   {{#if docker.enabled}}
   - name: dind
     image: docker:18.05-dind
+    args:
+      - "--mtu"
+      - "1450"
     resources:
       limits:
         cpu: {{docker.cpu }}m
